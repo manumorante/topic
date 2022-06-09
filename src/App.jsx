@@ -63,7 +63,9 @@ export default function App() {
 
   return (
     <div className='App mx-auto max-w-2xl flex flex-col gap-5'>
-      <details className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
+      <details
+        open
+        className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
         <summary className='select-none text-sm font-semibold text-white'>
           Texto bruto
         </summary>
@@ -77,17 +79,19 @@ export default function App() {
         </div>
       </details>
 
-      <details className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
-        <summary className='select-none text-sm font-semibold text-white'>
-          Texto normalizado
-        </summary>
-        <div className='mt-3 text-sm leading-6 text-slate-400'>
-          {normalized}
-        </div>
-      </details>
+      {normalized && (
+        <details className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
+          <summary className='select-none text-sm font-semibold text-white'>
+            Texto normalizado
+          </summary>
+          <div className='mt-3 text-sm leading-6 text-slate-400'>
+            {normalized}
+          </div>
+        </details>
+      )}
 
       <button
-        className='bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400'
+        className='focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400'
         onClick={handleRun}>
         Run
       </button>
