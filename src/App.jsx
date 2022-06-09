@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { TEXT } from '../text'
+import { connectingWords } from './connectingWords'
 
 export default function App() {
   const [data, setData] = useState(null)
@@ -63,46 +64,46 @@ export default function App() {
 
   return (
     <div className='App mx-auto max-w-2xl flex flex-col gap-5'>
-      <details
-        open
-        className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
-        <summary className='select-none text-sm font-semibold text-white'>
-          Texto bruto
-        </summary>
-        <div className='mt-3 text-sm leading-6 text-slate-400'>
-          <textarea
-            ref={textRef}
-            className='bg-slate-900 w-full'
-            defaultValue={TEXT}
-            rows={10}
-          />
-        </div>
-      </details>
+      <h1 className='font-mono text-xl font-bold'>Top[i]cs</h1>
+      <p className='text-lg text-slate-400'>
+        Esta aplicación es una excusa para usar{' '}
+        <span className='text-white'>Github Copilot</span> de una forma mas
+        dirigida. Tratando de lograr algoritmos complejos o cuando menos
+        tediosos de escribir.
+      </p>
 
-      {normalized && (
-        <details className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
-          <summary className='select-none text-sm font-semibold text-white'>
-            Texto normalizado
-          </summary>
-          <div className='mt-3 text-sm leading-6 text-slate-400'>
-            {normalized}
-          </div>
-        </details>
-      )}
+      <textarea
+        ref={textRef}
+        className='rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'
+        defaultValue={TEXT}
+        rows={10}
+      />
 
-      <button
-        className='focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400'
-        onClick={handleRun}>
-        Run
-      </button>
+      <div className='flex w-full justify-between gap-2 mb-7'>
+        <p className='text-slate-300'>
+          El texto de ejemplo fué obtenido de{' '}
+          <a
+            target='_blank'
+            href='https://beta.openai.com/playground'
+            className='text-white'>
+            OpenAI playground
+          </a>
+        </p>
+
+        <button
+          className='focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto bg-sky-500 highlight-white/20 hover:bg-sky-400'
+          onClick={handleRun}>
+          Run
+        </button>
+      </div>
 
       {/* Pinta la data en forma de tabla */}
       {data && (
         <table className='border-collapse table-auto w-full text-sm'>
-          <thead>
+          <thead className='bg-slate-900'>
             <tr>
-              <th>Palabra</th>
-              <th>Repeticiones</th>
+              <th className='p-4 pl-8'>Palabra</th>
+              <th className='p-4 pl-8'>Repeticiones</th>
             </tr>
           </thead>
           <tbody className='bg-slate-800'>
@@ -118,6 +119,30 @@ export default function App() {
             ))}
           </tbody>
         </table>
+      )}
+
+      {normalized && (
+        <details className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
+          <summary className='select-none text-sm font-semibold text-white'>
+            Texto normalizado
+          </summary>
+          <div className='mt-3 text-sm leading-6 text-slate-400'>
+            {normalized}
+          </div>
+        </details>
+      )}
+
+      {connectingWords && (
+        <details className='open rounded-lg bg-slate-900 p-6 shadow-lg ring-1 ring-white/10'>
+          <summary className='select-none text-sm font-semibold text-white'>
+            Algunos conectores generados con IA
+          </summary>
+          <div className='mt-3 text-sm leading-6 text-slate-400'>
+            {connectingWords.map((word, index) => (
+              <span key={index}>{word}, &nbsp;</span>
+            ))}
+          </div>
+        </details>
       )}
     </div>
   )
