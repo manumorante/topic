@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { TEXT } from '../text'
 import { connectingWords } from './connectingWords'
+import './script'
 
 export default function App() {
   const [data, setData] = useState(null)
